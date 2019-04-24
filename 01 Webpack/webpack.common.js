@@ -44,19 +44,28 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new CopyPlugin([
-            {
-                from: 'src/visitor.html',
-                to: 'visitor.html',
-                force: true,
-            },
-            {
-                from: 'src/admin.html',
-                to: 'admin.html',
-                force: true,
-            }
-        ]),
-        new HtmlWebpackPlugin()
+        // new CopyPlugin([
+        //     {
+        //         from: 'src/visitor.html',
+        //         to: 'visitor.html',
+        //         force: true,
+        //     },
+        //     {
+        //         from: 'src/admin.html',
+        //         to: 'admin.html',
+        //         force: true,
+        //     }
+        // ]),
+        new HtmlWebpackPlugin({
+            filename: 'admin_index.html',
+            template: 'src/admin.html',
+            chunks: ['common', 'admin']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'visitor_index.html',
+            template: 'src/visitor.html',
+            chunks: ['common', 'visitor']
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
