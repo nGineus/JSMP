@@ -1,0 +1,30 @@
+target/
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+
+# IntelliJ
+out/
+.idea
+*.iml
+
+#Mac
+.DS_Store
+
+#Overlays of alfresco
+overlays
+
+# Frontend
+node_modules
+node
+
+# test coverage
+/backoffice-ui/coverage
+
+/backoffice-ui/package-lock.json
