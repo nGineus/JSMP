@@ -10,7 +10,7 @@ const ENV = {
 };
 
 class ApiService {
-    let apiHost: string;
+    let apiHost = '';
 
     constructor(apiHost: string) {
         this.apiHost = apiHost;
