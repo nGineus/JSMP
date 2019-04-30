@@ -6,29 +6,34 @@
 // • Use async/await syntax.
 
 const ENV = {
-  HOST: 'https://swapi.co/api/'
+    HOST: 'https://swapi.co/api/'
 };
 
 class ApiService {
-    let apiHost = '';
 
-    constructor(apiHost: string) {
+    constructor(apiHost = '') {
         this.apiHost = apiHost;
+        console.log(this.apiHost);
     }
 
-    requestByPromise = () => {
-        return new Promise('OK PROMISE');
+    requestByPromise() {
+        return new Promise((resolve, reject) => {
+            resolve('OK PROMISE');
+        });
     };
 
-    requestByAsync = async () => {
+    async requestByAsync() {
         return await 'OK AWAIT';
     };
 }
 
 let api = new ApiService(ENV.HOST);
 
-api.requestByPromise().then( (message) => {
+api.requestByPromise().then((message) => {
+    XMLHttpRequest.
     console.log(message);
 });
 
-console.log(api.requestByAsync());
+api.requestByAsync().then((message) => {
+    console.log(message);
+});
