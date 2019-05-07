@@ -1,0 +1,13 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-microsoft-contrib/recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "export-name": [true, { "ignore-case": true, "allow": ["myChartOptions"] }]
+    },
+
+    "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
+}
