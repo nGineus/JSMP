@@ -4,8 +4,17 @@
   "description": "Oleksandr Kutsenko JSMP HW 02 JS.Next",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules index.js"
+    "build": "babel index.js -d dist",
+    "start": "cls && node index.js"
   },
   "author": "Oleksandr Kutsenko",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4"
+  },
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
 }

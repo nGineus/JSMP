@@ -1,4 +1,5 @@
 'use strict';
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const METHOD = {
     GET: "GET",
@@ -7,26 +8,35 @@ const METHOD = {
     DELETE: "DELETE"
 };
 
-export class HttpService {
-    // apiRequest = new XMLHttpRequest();
+class HttpService {
 
     constructor(apiHost, user, password) {
         this.apiHost = apiHost;
-        this.user = user;
-        this.password = password;
-
-        console.log('Initialisation... ', this.apiHost, this.user, this.password);
+        this.user = user; // For future releases
+        this.password = password; // For future releases
     }
 
     httpCallPromise(method, url) {
+        let apiRequest = new XMLHttpRequest();
+
         return new Promise((resolve, reject) => {
-            if (!url) {
-                reject(new Error('Unknown url.'));
-            }
-            setTimeout(() => {
-                reject(new Error('Timeout error.'));
-            }, 5000);
-            resolve('OK... ');
+            // if (!url) {
+            //     reject(new Error('Unknown url.'));
+            // }
+
+            apiRequest.addEventListener("load", () => {
+                console.log('LOAD EVENT', apiRequest.status);
+                console.log('LOAD EVENT', apiRequest.response);
+                resolve(apiRequest.response);
+            });
+
+            apiRequest.addEventListener("error", () => {
+                console.log('ERROR EVENT');
+                reject(apiRequest.error);
+            });
+            console.log('CALL Url: ', this.apiHost + url);
+            apiRequest.open(method, this.apiHost + url);
+            apiRequest.send();
         });
     };
 
@@ -46,3 +56,5 @@ export class HttpService {
         return await this.httpCallPromise(METHOD.PUT, url);
     };
 }
+
+module.exports = HttpService;

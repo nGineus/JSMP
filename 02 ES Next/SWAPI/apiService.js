@@ -2,29 +2,35 @@
 
 const HttpService = require("./httpService");
 
-export class ApiService {
-    httpService;
+class ApiService {
+    httpService; // Protocol service
+    apiCreds;    // API Credentials
+    apiCalls;    // API call string configurations
 
-    constructor(ENV) {
-        this.httpService = new HttpService(ENV.getHost(), ENV.getUser(), ENV.getPassword());
+    constructor(ConfigFn) {
+        this.apiCreds = ConfigFn.creds;
+        this.apiCalls = ConfigFn.apiCalls;
+        this.httpService = new HttpService(this.apiCreds.getHost(), this.apiCreds.getUser(), this.apiCreds.getPassword());
 
-        console.log('getPeople... ', ENV.getHost() + ENV.getPeople(0));
-        console.log('getPlanet... ', ENV.getHost() + ENV.getPlanet(1));
-        console.log('getStarship... ', ENV.getHost() + ENV.getStarship(2));
+        // console.log('getPeople... ', this.apiCreds.getHost() + this.apiCalls.getPeople(null));
+        // console.log('getPlanet... ', this.apiCreds.getHost() + this.apiCalls.getPlanet(1));
+        // console.log('getStarship... ', this.apiCreds.getHost() + this.apiCalls.getStarship(2));
     }
 
-    getPeople() {
-        console.log('getPeople... ');
-        // this.httpService.
+    getPeople(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getPeople(id));
     }
 
-    getPlanet() {
-        console.log('getPlanet... ');
-
+    getPlanet(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getPlanet(id));
     }
 
-    getStarship() {
-        console.log('getStarship... ');
-
+    getStarship(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getStarship(id));
+    }
+    getSpyces(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getStarship(id));
     }
 }
+
+module.exports = ApiService;
