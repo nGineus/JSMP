@@ -17,8 +17,8 @@
 
 //   Part 3
 //  Create custom class `Bookshelf` and add `Book` instances to it.
-//  Implement method `read` as a generator that will return iterator over all added books. Read all
-// books inside this loop.
+//  Implement method `read` as a generator that will return iterator over all added books.
+// Read all books inside this loop.
 
 const ENV = {
     HOST: 'https://swapi.co/api/'
