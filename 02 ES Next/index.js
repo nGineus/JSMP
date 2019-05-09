@@ -20,35 +20,28 @@
 //  Implement method `read` as a generator that will return iterator over all added books.
 // Read all books inside this loop.
 
-const ENV = {
-    HOST: 'https://swapi.co/api/'
-};
+import {ENV} from "./SWAPI/config";
+import {ApiService} from "./SWAPI/apiService";
 
-class ApiService {
+// const ENV = require("./SWAPI/config");
+// const ApiService = require("./SWAPI/apiService");
 
-    constructor(apiHost = '') {
-        this.apiHost = apiHost;
-        console.log(this.apiHost);
+let starWarsApi = new ApiService(ENV);
+
+starWarsApi.getPeople(0).then(
+    (response) => {
+        console.log('[All OK], ', response);
+    },
+    (error) => {
+        console.log('[Error happens],', error);
+    },
+    (final) => {
+        console.log('[Final],');
     }
+);
 
-    requestByPromise() {
-        return new Promise((resolve, reject) => {
-            resolve('OK PROMISE');
-        });
-    };
-
-    async requestByAsync() {
-        return await 'OK AWAIT';
-    };
-}
-
-let api = new ApiService(ENV.HOST);
-
-api.requestByPromise().then((message) => {
-    XMLHttpRequest.
-    console.log(message);
-});
-
-api.requestByAsync().then((message) => {
-    console.log(message);
-});
+// api.requestByAsync(ENV.getPeople(2)).then((message) => {
+//     console.log('AWAIT All OK. ', message);
+// }, (error) => {
+//     console.log('Error happens...', error);
+// });

@@ -1,0 +1,11 @@
+{
+  "name": "02-js.next",
+  "version": "1.0.0",
+  "description": "Oleksandr Kutsenko JSMP HW 02 JS.Next",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-modules index.js"
+  },
+  "author": "Oleksandr Kutsenko",
+  "license": "ISC"
+}
