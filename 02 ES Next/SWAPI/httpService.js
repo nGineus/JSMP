@@ -20,28 +20,24 @@ class HttpService {
         let apiRequest = new XMLHttpRequest();
 
         return new Promise((resolve, reject) => {
-            // if (!url) {
-            //     reject(new Error('Unknown url.'));
-            // }
+            console.log('CALL GET: ', this.apiHost + url);
+            apiRequest.addEventListener("load", () => resolve(JSON.parse(apiRequest.responseText)));
+            apiRequest.addEventListener("error", () => reject(apiRequest.error));
 
-            apiRequest.addEventListener("load", () => {
-                console.log('LOAD EVENT', apiRequest.status);
-                console.log('LOAD EVENT', apiRequest.response);
-                resolve(apiRequest.response);
-            });
-
-            apiRequest.addEventListener("error", () => {
-                console.log('ERROR EVENT');
-                reject(apiRequest.error);
-            });
-            console.log('CALL Url: ', this.apiHost + url);
             apiRequest.open(method, this.apiHost + url);
             apiRequest.send();
         });
     };
 
     async httpGetAwait(url) {
-        return await this.httpCallPromise(METHOD.GET, url);
+        return this.httpCallPromise(METHOD.GET, url);
+        // .then((result) => {
+        //
+        //     return result;
+        // }, (error) => {
+        //     console.log('ERROR EVENT', error);
+            // return null;
+        // });
     };
 
     async httpPostAwait(url) {

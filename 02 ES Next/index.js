@@ -20,23 +20,43 @@
 //  Implement method `read` as a generator that will return iterator over all added books.
 // Read all books inside this loop.
 
+
 const ConfigFn = require("./SWAPI/config");
 const ApiService = require("./SWAPI/apiService");
+const People = require("./Models/People");
 
 let starWarsApi = new ApiService(ConfigFn);
+let people1 = new People();
+let dto;
 
-starWarsApi.getPeople(1).then(
-    (response) => {
-        console.log('[***All OK], ', response);
-    },
-    (error) => {
-        console.log('[***Error happens], ', error);
-    }
-).catch((error) => {
-    console.log('[***CATCH], ', error);
-}).finally(() => {
-    console.log('[***Finaly]');
-});
+const init = async () => {
+    dto = await starWarsApi.getPeople(1);
+    console.log('PEOPLE DTO: ', dto);
+    people1 = await People.getFromDto(dto);
+    console.log('PEOPLE getFromDto: ', people1);
+};
+
+init();
+
+// starWarsApi.getPeople(1).then(async (dto) => {
+//     console.log('D-T-O: ', dto);
+//     people1 = new People(dto);
+// }, () => {
+//     console.log('ERROR D-T-O: ', dto);
+// });
+
+// starWarsApi.getPeople(1).then(
+//     (response) => {
+//         console.log('[***All OK], ', response);
+//     },
+//     (error) => {
+//         console.log('[***Error happens], ', error);
+//     }
+// ).catch((error) => {
+//     console.log('[***CATCH], ', error);
+// }).finally(() => {
+//     console.log('[***Finaly]');
+// });
 
 // api.requestByAsync(ConfigFn.getPeople(2)).then((message) => {
 //     console.log('AWAIT All OK. ', message);
