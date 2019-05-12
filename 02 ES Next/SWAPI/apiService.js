@@ -13,20 +13,20 @@ class ApiService {
         this.httpService = new HttpService(this.apiCreds.getHost(), this.apiCreds.getUser(), this.apiCreds.getPassword());
     }
 
-    async getPeople(id) {
-        return await this.httpService.httpGetAwait(this.apiCalls.getPeople(id)).then( (res) => res);
+    getPeople(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getPeople(id));
     }
 
-    async getPlanet(id) {
-        return await this.httpService.httpGetAwait(this.apiCalls.getPlanet(id)).then( (res) => res);
+    getPlanet(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getPlanet(id));
     }
 
-    async getStarship(id) {
-        return await this.httpService.httpGetAwait(this.apiCalls.getStarship(id)).then( (res) => res);
+    getStarship(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getStarship(id));
     }
 
-    async getFilms(id) {
-        return await this.httpService.httpGetAwait(this.apiCalls.getFilms(id)).then( (res) => res);
+    getFilms(id) {
+        return this.httpService.httpGetAwait(this.apiCalls.getFilms(id));
     }
 }
 

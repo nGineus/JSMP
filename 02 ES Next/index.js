@@ -1,10 +1,10 @@
 'use strict';
 
 // Part 1
-//  Promisify XMLHTTPRequest inside a class with methods: get, post, put, delete. Methods might
-// be used by reference. For example: `[‘http://google.com’].map(Http.get)`.
-//  Use async/await syntax.
-//  Play around with, for example SWAPI, to make couple of nested requests (request based on
+//  [DONE] Promisify XMLHTTPRequest inside a class with methods: get, post, put, delete. Methods might
+//    be used by reference. For example: `[‘http://google.com’].map(Http.get)`.
+//  [DONE] Use async/await syntax.
+//  [DONE] Play around with, for example SWAPI, to make couple of nested requests (request based on
 // previous request).
 
 // Part 2
@@ -12,8 +12,8 @@
 //  Inside `Book` instance interpolate `name` and `age` into string template (feel free to create any
 // story you like).
 //  Create iterator property to be able to read your cool story line by line inside for..of loop.
-//  Export `Book` as module. Do not create instance in the same file.
-//  Use as many ES.Next features as you can.
+//  [DONE] Export `Book` as module. Do not create instance in the same file.
+//  [DONE] Use as many ES.Next features as you can.
 
 //   Part 3
 //  Create custom class `Bookshelf` and add `Book` instances to it.
@@ -26,40 +26,25 @@ const ApiService = require("./SWAPI/apiService");
 const People = require("./Models/People");
 
 let starWarsApi = new ApiService(ConfigFn);
-let people1 = new People();
+let peoples = [];
 let dto;
 
-const init = async () => {
-    dto = await starWarsApi.getPeople(1);
-    console.log('PEOPLE DTO: ', dto);
-    people1 = await People.getFromDto(dto);
-    console.log('PEOPLE getFromDto: ', people1);
+let trinity = [1, 2, 3];
+
+const init = async (group) => {
+
+    peoples = await group.map(async one => {
+        const someone = new People(one);
+        dto = await starWarsApi.getPeople(one);
+        await someone.getFromDto(dto);
+        console.log(someone);
+
+        return someone;
+    });
+    return await peoples;
 };
 
-init();
-
-// starWarsApi.getPeople(1).then(async (dto) => {
-//     console.log('D-T-O: ', dto);
-//     people1 = new People(dto);
-// }, () => {
-//     console.log('ERROR D-T-O: ', dto);
-// });
-
-// starWarsApi.getPeople(1).then(
-//     (response) => {
-//         console.log('[***All OK], ', response);
-//     },
-//     (error) => {
-//         console.log('[***Error happens], ', error);
-//     }
-// ).catch((error) => {
-//     console.log('[***CATCH], ', error);
-// }).finally(() => {
-//     console.log('[***Finaly]');
-// });
-
-// api.requestByAsync(ConfigFn.getPeople(2)).then((message) => {
-//     console.log('AWAIT All OK. ', message);
-// }, (error) => {
-//     console.log('Error happens...', error);
-// });
+init(trinity).then(result => {
+    peoples = result;
+    console.log('PEOPLE Loaded: ', peoples);
+});

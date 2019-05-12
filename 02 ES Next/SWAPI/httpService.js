@@ -16,41 +16,34 @@ class HttpService {
         this.password = password; // For future releases
     }
 
-    httpCallPromise(method, url) {
+    httpCallPromise(method, url, data = null) {
         let apiRequest = new XMLHttpRequest();
 
         return new Promise((resolve, reject) => {
-            console.log('CALL GET: ', this.apiHost + url);
+            // console.log('CALL GET: ', url);
             apiRequest.addEventListener("load", () => resolve(JSON.parse(apiRequest.responseText)));
             apiRequest.addEventListener("error", () => reject(apiRequest.error));
 
             apiRequest.open(method, this.apiHost + url);
-            apiRequest.send();
+            apiRequest.send(data);
         });
-    };
+    }
 
     async httpGetAwait(url) {
         return this.httpCallPromise(METHOD.GET, url);
-        // .then((result) => {
-        //
-        //     return result;
-        // }, (error) => {
-        //     console.log('ERROR EVENT', error);
-            // return null;
-        // });
-    };
+    }
 
-    async httpPostAwait(url) {
-        return await this.httpCallPromise(METHOD.POST, url);
-    };
+    async httpPostAwait(url, data) {
+        return await this.httpCallPromise(METHOD.POST, url, data);
+    }
 
     async httpDeleteAwait(url) {
         return await this.httpCallPromise(METHOD.DELETE, url);
-    };
+    }
 
-    async httpPutAwait(url) {
-        return await this.httpCallPromise(METHOD.PUT, url);
-    };
+    async httpPutAwait(url, data) {
+        return await this.httpCallPromise(METHOD.PUT, url, data);
+    }
 }
 
 module.exports = HttpService;
