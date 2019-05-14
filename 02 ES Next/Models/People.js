@@ -5,7 +5,6 @@ const ApiService = require("../SWAPI/apiService");
 let starWarsApi = new ApiService(ConfigFn);
 
 class People {
-    id;
 
     constructor(id) {
         this.id = id;

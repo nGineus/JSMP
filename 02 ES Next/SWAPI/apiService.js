@@ -3,9 +3,7 @@
 const HttpService = require("./httpService");
 
 class ApiService {
-    httpService; // Protocol service
-    apiCreds;    // API Credentials
-    apiCalls;    // API call string configurations
+
 
     constructor(ConfigFn) {
         this.apiCreds = ConfigFn.creds;

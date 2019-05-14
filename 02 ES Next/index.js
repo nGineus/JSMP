@@ -26,25 +26,17 @@ const ApiService = require("./SWAPI/apiService");
 const People = require("./Models/People");
 
 let starWarsApi = new ApiService(ConfigFn);
-let peoples = [];
 let dto;
 
 let trinity = [1, 2, 3];
 
-const init = async (group) => {
+async function getPeopleById (group) {
 
-    peoples = await group.map(async one => {
+    return group.map( async one => {
         const someone = new People(one);
         dto = await starWarsApi.getPeople(one);
-        await someone.getFromDto(dto);
-        console.log(someone);
-
-        return someone;
+        return await someone.getFromDto(dto).then( res => res);
     });
-    return await peoples;
-};
+}
 
-init(trinity).then(result => {
-    peoples = result;
-    console.log('PEOPLE Loaded: ', peoples);
-});
+console.log(getPeopleById(trinity));
