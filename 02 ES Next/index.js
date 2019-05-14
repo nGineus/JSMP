@@ -5,13 +5,13 @@
 //    be used by reference. For example: `[‘http://google.com’].map(Http.get)`.
 //  [DONE] Use async/await syntax.
 //  [DONE] Play around with, for example SWAPI, to make couple of nested requests (request based on
-// previous request).
+//    previous request).
 
 // Part 2
-//  Create custom class `Book` with constructor param `character` with fields: `name`, `age`.
-//  Inside `Book` instance interpolate `name` and `age` into string template (feel free to create any
-// story you like).
-//  Create iterator property to be able to read your cool story line by line inside for..of loop.
+//  [DONE] Create custom class `Book` with constructor param `character` with fields: `name`, `age`.
+//  [DONE] Inside `Book` instance interpolate `name` and `age` into string template (feel free to create any
+//    story you like).
+//  [DONE] Create iterator property to be able to read your cool story line by line inside for..of loop.
 //  [DONE] Export `Book` as module. Do not create instance in the same file.
 //  [DONE] Use as many ES.Next features as you can.
 
@@ -24,19 +24,22 @@
 const ConfigFn = require("./SWAPI/config");
 const ApiService = require("./SWAPI/apiService");
 const People = require("./Models/People");
+const Heroes = require("./Models/Heroes");
 
 let starWarsApi = new ApiService(ConfigFn);
-let dto;
 
-let trinity = [1, 2, 3];
+let pretenders = [1, 2, 3, 4 ,5];
+let heroes = new Heroes();
+let loadedPeoples = [];
 
-async function getPeopleById (group) {
-
-    return group.map( async one => {
-        const someone = new People(one);
-        dto = await starWarsApi.getPeople(one);
-        return await someone.getFromDto(dto).then( res => res);
-    });
+async function getPeopleById(group) {
+    for await (let one of group) {
+        const someone = new People(await starWarsApi.getPeople(one));
+        heroes.addHero(await someone.loadFromDto().then(res => res));
+    }
 }
 
-console.log(getPeopleById(trinity));
+heroes.storyAboutHeroes();
+getPeopleById(pretenders).then(() => {
+    console.log('AFTER ALL ', loadedPeoples);
+});

@@ -5,34 +5,32 @@ const ApiService = require("../SWAPI/apiService");
 let starWarsApi = new ApiService(ConfigFn);
 
 class People {
+    info;
 
-    constructor(id) {
-        this.id = id;
-        this.films = [];
-        this.starships = [];
+    constructor(dto) {
+        this.info = `Name: ${dto.name.toString().toUpperCase()}, gender: ${dto.gender.toString().toUpperCase()}, year of birth: ${dto.birth_year}`;
+        this.films = dto.films;
+        this.homeworld = dto.homeworld;
+        this.starships = dto.starships;
     }
 
-    async getFromDto(dto) {
-        this.name = dto.name;
-        this.gender = dto.gender;
-        this.mass = dto.mass;
+    async loadFromDto() {
+        let i = 0;
 
-        this.homeworld = await starWarsApi.getPlanet(this.getId(dto.homeworld))
-            .then(res => res.name);
+        for await (let film of this.films) {
+            this.films[i] = await starWarsApi.getFilms(this.getId(film)).then(res => res.title);
+            i++;
+        }
 
-        const filmsPromises = dto.films
-            .map(item => starWarsApi.getFilms(this.getId(item))
-                .then(res => res.title));
+        i = 0;
+        for await (let spaceship of this.starships) {
+            this.starships[i] = await starWarsApi.getStarship(this.getId(spaceship)).then(res => res.name);
+            i++
+        }
 
-        const starshipsPromises = dto.starships
-            .map(item => starWarsApi.getStarship(this.getId(item))
-                .then(res => res.name));
+        this.homeworld = await starWarsApi.getPlanet(this.getId(this.homeworld)).then(res => res.name);
 
-        this.films = await Promise.all(filmsPromises);
-
-        this.starships = await Promise.all(starshipsPromises);
-
-        return await this;
+        return this;
     }
 
     getId(line) {
