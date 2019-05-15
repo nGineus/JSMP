@@ -4,7 +4,6 @@ const HttpService = require("./httpService");
 
 class ApiService {
 
-
     constructor(ConfigFn) {
         this.apiCreds = ConfigFn.creds;
         this.apiCalls = ConfigFn.apiCalls;

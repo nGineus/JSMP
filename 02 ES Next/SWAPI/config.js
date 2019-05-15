@@ -9,7 +9,6 @@ const ConfigFn = {
         getPlanet: (planet) => (planet !== null) ? `planets/${planet}/` : `planets/`,
         getStarship: (starship) => (starship !== null) ? `starships/${starship}/` : `starships/`,
         getFilms: (film) => (film !== null) ? `films/${film}/` : `films/`,
-        // getSpices: (spice) => (spice !== null) ? `spice/${spice}/` : `spice/`,
     }
 };
 

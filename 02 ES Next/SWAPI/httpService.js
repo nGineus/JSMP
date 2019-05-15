@@ -20,7 +20,6 @@ class HttpService {
         let apiRequest = new XMLHttpRequest();
 
         return new Promise((resolve, reject) => {
-            // console.log('CALL GET: ', url);
             apiRequest.addEventListener("load", () => resolve(JSON.parse(apiRequest.responseText)));
             apiRequest.addEventListener("error", () => reject(apiRequest.error));
 

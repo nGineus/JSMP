@@ -16,9 +16,9 @@
 //  [DONE] Use as many ES.Next features as you can.
 
 //   Part 3
-//  Create custom class `Bookshelf` and add `Book` instances to it.
+//  [DONE] Create custom class `Bookshelf` and add `Book` instances to it.
 //  Implement method `read` as a generator that will return iterator over all added books.
-// Read all books inside this loop.
+//    Read all books inside this loop.
 
 
 const ConfigFn = require("./SWAPI/config");
@@ -28,9 +28,8 @@ const Heroes = require("./Models/Heroes");
 
 let starWarsApi = new ApiService(ConfigFn);
 
-let pretenders = [1, 2, 3, 4 ,5];
+let pretenders = [1, 2, 3, 4, 5];
 let heroes = new Heroes();
-let loadedPeoples = [];
 
 async function getPeopleById(group) {
     for await (let one of group) {
@@ -40,6 +39,18 @@ async function getPeopleById(group) {
 }
 
 heroes.storyAboutHeroes();
+
 getPeopleById(pretenders).then(() => {
-    console.log('AFTER ALL ', loadedPeoples);
+    heroes.removeHero({info: 'Name: DARTH VADER, gender: MALE, year of birth: 41.9BBY'});
+    heroes.storyAboutHeroes();
+
+    heroes.iterateResetCounter();
+
+    const iterator = heroes.iterateHero();
+    let nextOne = iterator.next();
+
+    while (!nextOne.done) {
+        console.log(nextOne.value);
+        nextOne = iterator.next();
+    }
 });
