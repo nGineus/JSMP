@@ -45,13 +45,7 @@ getPeopleById(pretenders).then(() => {
     heroes.removeHero({info: 'Name: DARTH VADER, gender: MALE, year of birth: 41.9BBY'});
     heroes.storyAboutHeroes();
 
-    heroes.iterateResetCounter();
-
-    const iterator = heroes.iterateHero();
-    let nextOne = iterator.next();
-
-    while (!nextOne.done) {
-        console.log(nextOne.value);
-        nextOne = iterator.next();
+    for(let hero of heroes) {
+        console.log(hero);
     }
 });
