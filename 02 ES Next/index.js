@@ -18,8 +18,9 @@
 //   Part 3
 //  [DONE] Create custom class `Bookshelf` and add `Book` instances to it.
 //  Implement method `read` as a generator that will return iterator over all added books.
-//    Read all books inside this loop.
+//   [DONE] Read all books inside this loop.
 
+//https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Iterators_and_Generators
 
 const ConfigFn = require("./SWAPI/config");
 const ApiService = require("./SWAPI/apiService");
@@ -34,7 +35,7 @@ let heroes = new Heroes();
 async function getPeopleById(group) {
     for await (let one of group) {
         const someone = new People(await starWarsApi.getPeople(one));
-        heroes.addHero(await someone.loadFromDto().then(res => res));
+        heroes.addHero(await someone.loadFromDto());
     }
 }
 
