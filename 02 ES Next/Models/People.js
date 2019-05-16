@@ -3,6 +3,7 @@ const ApiService = require("../SWAPI/apiService");
 let starWarsApi = new ApiService(ConfigFn);
 
 class People {
+    info;
 
     constructor(dto) {
         this.info = `Name: ${dto.name.toString().toUpperCase()}, gender: ${dto.gender.toString().toUpperCase()}, year of birth: ${dto.birth_year}`;
