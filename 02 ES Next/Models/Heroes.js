@@ -4,7 +4,15 @@ class Heroes {
     heroes = [];
     counter = 0;
 
+    [Symbol.iterator] = function* () {
+        while (this.iterateIsNotLast()) {
+            yield this.heroes[this.counter];
+            this.counter++;
+        }
+    };
+
     constructor() {
+
     }
 
     addHero(people) {
@@ -35,12 +43,9 @@ class Heroes {
         return this.counter !== this.heroes.length;
     }
 
-    * iterateHero() {
-        while (this.iterateIsNotLast()) {
-            yield this.heroes[this.counter];
-            this.counter++;
-        }
-    }
+    // * iterateHero() {
+    //
+    // }
 
 }
 
