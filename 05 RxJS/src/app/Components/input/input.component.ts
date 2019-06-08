@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {fromEvent, Observable, Subscription} from "rxjs";
-import {debounceTime, takeUntil, tap} from "rxjs/operators";
-import {StoreService} from "../../Services/store.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { fromEvent, Subject, Subscription } from "rxjs";
+import { debounceTime, distinctUntilChanged, tap } from "rxjs/operators";
+import {ObservableService} from "../../Services/observable.service";
+import { StoreService } from '../../Services/store.service';
 
 @Component({
   selector: 'app-input',
@@ -9,39 +10,28 @@ import {StoreService} from "../../Services/store.service";
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit, OnDestroy {
-  nameInput: HTMLInputElement;
-  subscription: Observable<any> = new Observable();
-  inputSubject: Observable<any>;
+  nameInput: HTMLElement;
+  subscription: Subscription;
+  inputSubject: Subject<string>;
 
-
-  constructor(private storeService: StoreService) {
+  constructor(private observableService: ObservableService,
+              private storeService: StoreService) {
   }
 
   ngOnInit(): void {
-    this.nameInput = document.getElementById('inputElement') as HTMLInputElement;
-    this.inputSubject = this.storeService.getInputSubject();
+    this.nameInput = document.getElementById( 'inputElement' ) as HTMLElement;
+    this.inputSubject = this.observableService.getInputSubject();
 
-    fromEvent(this.nameInput, 'keyup')
+    this.subscription = fromEvent( this.nameInput, 'keyup' )
       .pipe(
-        debounceTime(400),
-        tap((event) => this.storeService.inputSubject.next(event.target.value))
+        debounceTime( 1000 ),
+        distinctUntilChanged(),
+        tap(filter => this.storeService.changeFilter(( filter as any ).target.value))
       )
       .subscribe();
-
-    this.storeService.inputSubject
-      .pipe(
-        tap((event) => {
-          console.log('PING: ', event);
-        })
-      )
-      .subscribe();
-    this.storeService.inputSubject.next('INIT');
-
   }
 
   ngOnDestroy(): void {
-    // this.subscription.next();
-    // this.subscription.complete();
+    this.subscription.unsubscribe();
   }
-
 }

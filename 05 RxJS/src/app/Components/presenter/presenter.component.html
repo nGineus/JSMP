@@ -1,3 +1,11 @@
-<p>
-  presenter works!
-</p>
+<div class="wrapper">
+  <p class="accented">User id: {{model.userId}}</p>
+  <p *ngIf="model.title">Title: {{model.title}}</p>
+  <p *ngIf="model.body">Body: {{model.body}}</p>
+  <p *ngIf="mode === ModeEnum.TODO">Done:
+    <input type="checkbox"
+           [checked]="model.completed"
+           [disabled]="true"
+    ></p>
+</div>
+

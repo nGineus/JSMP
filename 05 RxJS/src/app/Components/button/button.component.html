@@ -1,3 +1,15 @@
-<p>
-  button works!
-</p>
+<button type="button"
+        [ngClass]="{'btn-active': this.mode === ModeEnum.POSTS}"
+        (click)="this.setMode(ModeEnum.POSTS)">
+  Get Post
+</button>
+<button type="button"
+        [ngClass]="{'btn-active': this.mode === ModeEnum.ALBUMS}"
+        (click)="this.setMode(ModeEnum.ALBUMS)">
+  Get Albums
+</button>
+<button type="button"
+        [ngClass]="{'btn-active': this.mode === ModeEnum.TODO}"
+        (click)="this.setMode(ModeEnum.TODO)">
+  Get Todos
+</button>

@@ -1,29 +1,44 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import { StoreModel } from '../Models/store-model';
+import { tap } from 'rxjs/operators';
+import { ModeEnum } from '../Enums/mode.enum';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
+@Injectable( {
   providedIn: 'root'
-})
+} )
 export class StoreService {
-  inputSubject: Subject<string>;
-  buttonSubject: Subject<string>;
-  apiSubject: Subject<string>;
+  private model: StoreModel;
+  private storeSubject: BehaviorSubject<StoreModel>;
 
   constructor() {
-    this.inputSubject = new Subject<string>();
-    this.buttonSubject = new Subject<string>();
-    this.apiSubject = new Subject<string>();
+    this.model = new StoreModel();
+    this.storeSubject = new BehaviorSubject( this.model );
+
+    this.storeSubject
+      .pipe( tap( model => this.model = model ) )
+      .subscribe();
   }
 
-  getInputSubject() {
-    return this.apiSubject.asObservable();
+  getStoreSubject() {
+    return this.storeSubject;
   }
 
-  getButtonSubject() {
-    return this.buttonSubject.asObservable();
+  setMode( mode: ModeEnum ) {
+    if ( this.model.changeMode( mode ) ) {
+      this.storeSubject.next( this.model );
+    }
   }
 
-  getApiSubject() {
-    return this.apiSubject.asObservable();
+  changeFilter( filter: string ) {
+    if ( this.model.changeFilter( +filter ) ) {
+      this.storeSubject.next( this.model );
+    }
   }
+
+  setPayload( dto: any ) {
+    this.model.setPayload( dto );
+    this.storeSubject.next( this.model );
+  }
+
 }

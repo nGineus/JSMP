@@ -1,13 +1,23 @@
-<app-input
-  (change)="onInputChange($event)"
-></app-input>
+<h1>{{title}}</h1>
 
-<app-presenter
->
+<app-input></app-input>
 
-</app-presenter>
+<p *ngIf="!isEmpty()"
+   class="accented">
+  {{model.mode | ModeHumanizer}}
+</p>
 
-<app-button
-  (change)="onButtonChange($event)"
->
-</app-button>
+<div class="wrapper"
+     *ngFor="let item of model.list">
+  <app-presenter
+    [mode]="model.mode"
+    [model]="item">
+  </app-presenter>
+</div>
+
+<p class="accented"
+   *ngIf="isEmpty()">
+  No Items. Please, change the filter
+</p>
+
+<app-button></app-button>

@@ -2,8 +2,10 @@ Home task - RxJS
 REQUIRE: JSONPlaceholder API - https://jsonplaceholder.typicode.com/
 
 1-3p.
-Create an request call for API data (ex. posts) fetch. Convert fetch response to Observable.
-Map data to model (model should be based on DTO that comes). Display models on UI.
+Create an request call for API data (ex. posts) fetch.
+Convert fetch response to Observable.
+Map data to model (model should be based on DTO that comes). 
+Display models on UI.
 
 4p. 
 Create button. Create Subject. On click fire subject, that will make API call created above. (use
