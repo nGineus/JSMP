@@ -1,0 +1,15 @@
+.header-style {
+  padding: 8px;
+  max-width: 100%;
+  color: darkslategrey;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+
+  .action-block {
+    width: 400px;
+    border: 1px solid darkslategrey;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 8px;
+  }
+}
