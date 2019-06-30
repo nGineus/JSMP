@@ -2,7 +2,7 @@ import React from 'react';
 
 import './note-component.scss'
 
-const NoteElement = ({label, important}) => {
+const NoteComponent = ({label, important}) => {
   return (
     <div className='note-style'>
       <span className={important ? 'active' : ''}>{label}</span>
@@ -20,4 +20,4 @@ const NoteElement = ({label, important}) => {
   );
 };
 
-export default NoteElement;
+export default NoteComponent;

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import HeaderComponent from './Components/header-component';
-import FilterComponent from './Components/filter-component';
-import NotesList from './Components/notes-list-component';
+import HeaderComponent from './Components/header-component/header-component';
+import FilterComponent from './Components/filter-component/filter-component';
+import NotesList from './Components/notes-list-component/notes-list-component';
 
 const items = [
   {id: 1, label: 'First note', important: false},
