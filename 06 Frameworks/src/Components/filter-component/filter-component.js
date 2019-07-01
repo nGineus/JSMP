@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './filter-component.scss';
 
-const FilterComponent = () => (
-  <input className="filter-input" type="text" placeholder={"Filter"}/>
-);
+export default class FilterComponent extends Component {
+  value = this.props.value || 'First';
 
-export default FilterComponent;
+  setValue = (value) => {
+    console.log('Value ', value.target.value);
+  };
+
+  render() {
+    return (
+      <input className="filter-input"
+             type="text"
+             placeholder={"Filter"}
+             onChange={this.setValue}
+             defaultValue={this.value}
+      />
+    );
+  }
+}
