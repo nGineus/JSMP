@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import './filter-component.scss';
 
 export default class FilterComponent extends Component {
-  value = this.props.value || 'First';
+
+  constructor(props) {
+    super(props);
+    this.value = this.props.value || 'First';
+  }
+
 
   setValue = (value) => {
     console.log('Value ', value.target.value);
