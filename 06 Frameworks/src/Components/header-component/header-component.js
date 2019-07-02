@@ -1,29 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
+import './header-component.scss';
 
-const HeaderComponent = () => {
-  const styles = {
-    fontSize: '20px',
-    fontFamily: 'Arial, sans-serif'
-  };
-  return (
-    <div className="header-style">
-      <h1 className={styles}>Nots App</h1>
-      <div className="btn-group action-block">
-        <button type="button"
-                className="btn btn-info"
-        >All
-        </button>
-        <button type="button"
-                className="btn btn-outline-secondary"
-        >Completed
-        </button>
-        <button type="button"
-                className="btn btn-outline-secondary"
-        >Archived
-        </button>
-      </div>
-    </div>
-  );
-};
+export default class HeaderComponent extends Component {
 
-export default HeaderComponent;
+    render() {
+        return (
+            <div className="header-style">
+                {/*<h1>Nots App</h1>*/}
+                <div className="btn-group action-block">
+                    <button type="button"
+                            className="btn btn-info"
+                    >All
+                    </button>
+                    <button type="button"
+                            className="btn btn-outline-secondary"
+                    >Completed
+                    </button>
+                    <button type="button"
+                            className="btn btn-outline-secondary"
+                    >Archived
+                    </button>
+                </div>
+            </div>
+        );
+    };
+}

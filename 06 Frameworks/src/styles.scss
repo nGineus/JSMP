@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 1200px;
+  max-width: 80vw;
+  height: auto;
+  min-height: 800px;
+
+  margin: 20px auto;
+  padding: 6px;
+
+  background-color: azure;
+  border: 1px solid gray;
+  border-radius: 3px;
+}

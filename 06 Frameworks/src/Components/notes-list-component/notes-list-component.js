@@ -1,35 +1,26 @@
 import React, {Component} from 'react';
+import './notes-list-component.scss';
 import NoteComponent from "./note-component/note-component";
 
 export default class NotesList extends Component {
-  state = {
-    list: this.props.list
-  };
+    state = {
+        list: this.props.list,
+        mode: this.props.mode
+    };
 
-  constructor(props) {
-    super(props);
-    this.id = 3;
+    render() {
 
-    setInterval(() => {
-      this.id++;
-      console.log(this.state.list);
-      this.setState((state) => {
-        return {
-          list: [...state.list, {id: this.id, label: '+++ note', important: true}]
-        }
-      });
-    }, 2000);
-  }
-
-  render() {
-
-    return (
-      <ul>
-        {this.state.list.map((note) => {
-          const {id} = note;
-          return (<li key={id}><NoteComponent {...note}/></li>)
-        })}
-      </ul>)
-  };
+        return (
+            <fragment>
+                <h5 className='note-list__title'>{this.state.mode}</h5>
+                <div className='note-list__wrapper'>
+                    {this.state.list.map((note) => {
+                        let {id, noteProps} = {...note};
+                        debugger;
+                        return (<NoteComponent key={id} {...noteProps}/>)
+                    })}
+                </div>
+            </fragment>)
+    };
 
 }
