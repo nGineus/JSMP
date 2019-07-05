@@ -10,6 +10,7 @@ import { ObservableService } from "./Services/observable.service";
 import { HttpClientModule } from '@angular/common/http';
 import { ModeHumanizerPipe } from './Pipes/mode-humanizer.pipe';
 import { StoreService } from './Services/store.service';
+import { MatTestComponent } from './Components/mat-test/mat-test.component';
 
 @NgModule( {
   declarations: [
@@ -17,7 +18,8 @@ import { StoreService } from './Services/store.service';
     InputComponent,
     ButtonComponent,
     PresenterComponent,
-    ModeHumanizerPipe
+    ModeHumanizerPipe,
+    MatTestComponent
   ],
   imports: [
     BrowserModule,
