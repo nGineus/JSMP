@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModeHumanizerPipe } from './Pipes/mode-humanizer.pipe';
 import { StoreService } from './Services/store.service';
 import { MatTestComponent } from './Components/mat-test/mat-test.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from "@angular/material";
 
 @NgModule( {
   declarations: [
@@ -23,7 +25,9 @@ import { MatTestComponent } from './Components/mat-test/mat-test.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    BrowserAnimationsModule
   ],
   providers: [ ApiService, ObservableService, StoreService ],
   bootstrap: [ AppComponent ]
