@@ -1,6 +1,6 @@
 const express = require('express');
 
-const deviceService = require('../services/devices');
+const deviceService = require('../services/rooms');
 
 const router = express.Router();
 
@@ -42,12 +42,12 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/log/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const {id} = req.params;
-  const log = await deviceService.getDeviceLogById(id);
+  const device = await deviceService.getDeviceLog(id);
 
-  if (log) {
-    res.json(log);
+  if (device) {
+    res.json(device);
   } else {
     res.sendStatus(404);
   }
