@@ -13,8 +13,6 @@ let deviceState = 'off';
 
 app.get('/cm', (req, res) => {
   const command = COMMANDS[req.query.cmd];
-  console.log('command :: ', req.query);
-
   if (command === 'on') {
     deviceState = 'on';
   } else if (command === 'off') {

@@ -1,7 +1,5 @@
 const express = require('express');
-
 const deviceService = require('../services/devices');
-
 const router = express.Router();
 
 router.get('/', async (req, res) => {

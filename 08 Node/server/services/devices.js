@@ -1,6 +1,5 @@
-import DeviceLog from "../../frontend/src/scenes/DeviceLog";
-
 const Device = require('../models/devices');
+const DeviceLog = require('../models/device.log');
 const sendRequest = require('../utils/request');
 
 function deviceAdapter(device) {
@@ -10,19 +9,10 @@ function deviceAdapter(device) {
   };
 }
 
-function deviceLogAdapter(deviceLog) {
-  console.log('deviceLog In ', deviceLog);
-  // const {_id, date, action} = ;
-  const deviceOutLog = deviceLog.map( logItem => {
-    return {id: _id, date, action}
-  });
-  console.log('deviceLog Out ', deviceOutLog);
-
-  return deviceOutLog;
-}
-
 async function getDevices() {
-  const devices = await Device.find({}).exec();
+  const devices = await Device
+    .find()
+    .exec();
   return devices.map(deviceAdapter);
 }
 
@@ -33,22 +23,12 @@ async function getDeviceById(deviceId) {
 
 
 async function getDeviceLogById(deviceId) {
-  const deviceLog = await DeviceLog.findById(deviceId).exec();
-  return deviceLogAdapter(deviceLog);
-  // return [
-  //   {
-  //     date: '2018-31-08 16:00:00',
-  //     action: 'On'
-  //   },
-  //   {
-  //     date: '2018-31-08 17:00:00',
-  //     action: 'Off'
-  //   }]
+  return await DeviceLog.find({
+    deviceId: deviceId
+  }).select('-_id -__v -deviceId').exec();
 }
 
 async function removeDevice(deviceId) {
-  console.log('Remove device', deviceId);
-
   await Device.findByIdAndDelete(deviceId).exec();
 }
 
@@ -61,8 +41,8 @@ async function addDevice(device) {
 }
 
 async function updateDevice(deviceId, data) {
-  console.log('Update device', deviceId, data);
   const device = await Device.findById(deviceId).exec();
+
   if (!device) {
     return null
   }
@@ -72,17 +52,25 @@ async function updateDevice(deviceId, data) {
       device.port,
       data.state
     );
+
+    await logDeviceState(deviceId, data.state);
   }
-
   await Device.findByIdAndUpdate(deviceId, data).exec();
-
 }
 
 async function updateDeviceState(address, port, state) {
-  const command = state === 'off' ? 'Power off' : 'Power On';
-
+  const command = state === 'off' ? 'Off' : 'On';
   const url = `http://${address}:${port}/cm?cmd=${command}`;
   await sendRequest(url);
+}
+
+async function logDeviceState(deviceId, state) {
+  const newDeviceLog = new DeviceLog({
+    date: new Date().toLocaleString(),
+    action: state === 'off' ? 'Off' : 'On',
+    deviceId: deviceId
+  });
+  newDeviceLog.save();
 }
 
 module.exports = {
