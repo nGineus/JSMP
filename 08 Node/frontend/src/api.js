@@ -45,7 +45,6 @@ export async function getGroupLog(groupId) {
 
 export async function getDevices() {
   const response = await axios.get(`${API_URL}/devices`);
-  console.log('response... ', response);
   return response.data;
 
 }
@@ -56,7 +55,6 @@ export async function getDeviceById(deviceId) {
 }
 
 export async function addDevice(device, groupId = null) {
-  debugger;
   if (groupId) {
     await axios.post(`${API_URL}/groups/add/${groupId}`, device);
   } else {
@@ -67,7 +65,6 @@ export async function addDevice(device, groupId = null) {
 
 export async function removeDevice(deviceId, groupId = null) {
   const requestString = `${API_URL}/devices/${deviceId}${groupId ? '/'+ groupId : ''}`;
-  console.log('requestString ', requestString);
   const response = await axios.delete(requestString);
   return response.data;
 }

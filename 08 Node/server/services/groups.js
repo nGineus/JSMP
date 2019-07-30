@@ -1,13 +1,12 @@
 const Group = require('../models/group');
-const Device = require('../models/devices');
+const deviceService = require('./devices');
 
-const logService = require('../services/logService');
-const deviceService = require('../services/devices');
+const logService = require('./logService');
 
 function groupAdapter(group) {
-  const {_id, name, devices, state} = group;
+  const {id, name, devices, state} = group;
   return {
-    id: _id, name, devices, state
+    id, name, devices, state
   };
 }
 
@@ -23,7 +22,8 @@ async function getGroupById(groupId) {
   let devices = [];
 
   for await (let deviceId of group.devices) {
-    devices.push(await deviceService.getDeviceById(deviceId));
+    const device = await deviceService.getDeviceById(deviceId);
+    devices.push(device);
   }
   group.devices = devices;
   return groupAdapter(group);
@@ -50,7 +50,6 @@ async function updateGroup(groupId, data) {
 
   if (data.state) {
     group.devices.forEach(async (device) => {
-
       await deviceService.updateDevice(
         device,
         {
@@ -65,7 +64,7 @@ async function updateGroup(groupId, data) {
 }
 
 async function addDeviceToGroup(groupId, data) {
-  const group = await Group.findById(groupId).exec();
+  const group = groupAdapter(await Group.findById(groupId).exec());
   if (!group) {
     return null
   }
@@ -74,20 +73,25 @@ async function addDeviceToGroup(groupId, data) {
     ...data,
     groupId: groupId
   });
-  await deviceService.updateDevice(device._id, {state: group.state});
 
-  group.devices.push(device._id);
+  group.devices.push(device.id);
 
   await Group.findByIdAndUpdate(groupId, group);
+
+  try {
+    await deviceService.updateDevice(device.id, {state: group.state});
+  } catch {
+    return null;
+  }
 }
 
 async function removeDeviceFromGroup(groupId, deviceId) {
-  const group = await Group.findById(groupId).exec();
+  const group = groupAdapter(await Group.findById(groupId).exec());
   if (!group) {
     return null
   }
 
-  group.devices = group.devices.filter(device => device._id !== deviceId);
+  group.devices = group.devices.filter(device => device !== deviceId);
 
   await Group.findByIdAndUpdate(groupId, group);
 }

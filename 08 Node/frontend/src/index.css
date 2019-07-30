@@ -11,3 +11,7 @@ body {
 .margins {
   margin: 20px 0;
 }
+
+.long-margin-top {
+  margin-top: 120px;
+}

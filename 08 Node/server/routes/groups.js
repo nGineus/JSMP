@@ -32,7 +32,6 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  console.log('DELETING GROUP:', req.params.id);
   try {
     await groupService.removeGroup(req.params.id);
     res.sendStatus(200);
@@ -42,7 +41,6 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.delete('/:id/:deviceId', async (req, res) => {
-  console.log('DELETING DEVICE FROM GROUP:', req.params.id, req.params.deviceId);
   try {
     await groupService.removeDeviceFromGroup(req.params.id, req.params.deviceId);
     res.sendStatus(200);

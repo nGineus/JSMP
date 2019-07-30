@@ -19,7 +19,6 @@ export default class Devices extends Component {
     this.setState({
       devices: await getDevices(),
     });
-    console.log('refreshDevices', this.state);
   };
 
   render() {

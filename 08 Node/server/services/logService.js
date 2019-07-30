@@ -7,7 +7,6 @@ async function getLogById(id) {
 }
 
 async function logState(id, state) {
-  console.log('logState.... ', id, state);
   const newLog = new Log({
     date: new Date().toLocaleString(),
     action: state === 'off' ? 'Off' : 'On',

@@ -6,13 +6,14 @@ const PORT = process.argv[2];
 const COMMANDS = {
   'Power TOGGLE': 'toggle',
   'Power On': 'on',
-  'Power off': 'off'
+  'Power Off': 'off'
 };
 
 let deviceState = 'off';
 
 app.get('/cm', (req, res) => {
   const command = COMMANDS[req.query.cmd];
+  console.log('command: ', command);
   if (command === 'on') {
     deviceState = 'on';
   } else if (command === 'off') {

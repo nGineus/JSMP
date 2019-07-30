@@ -56,7 +56,7 @@ export default class Groups extends PureComponent {
               </thead>
               <tbody>
               {groups.map((group, index) =>
-                <GroupItem key={group.id} group={group} index={index +1} onUpdate={this.refreshGroups}/>
+                <GroupItem key={index} group={group} index={index +1} onUpdate={this.refreshGroups}/>
               )}
               </tbody>
 

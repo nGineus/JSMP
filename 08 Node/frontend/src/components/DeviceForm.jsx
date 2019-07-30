@@ -58,7 +58,7 @@ export default class DeviceForm extends PureComponent {
 
                 <div className="float-right">
                     <button type="submit" className="btn btn-primary mr-2">Submit</button>
-                    <button type="button" className="btn btn-default" onClick={this.handleCancelClick}>Cancel</button>
+                    <button type="button" className="btn btn-warning" onClick={this.handleCancelClick}>Cancel</button>
                 </div>
             </form>
         );

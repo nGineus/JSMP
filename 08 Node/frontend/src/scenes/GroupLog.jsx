@@ -8,7 +8,6 @@ export default class GroupLog extends PureComponent {
     };
 
     componentDidMount = async () => {
-        debugger;
         const { id } = this.props.match.params;
 
         this.setState({

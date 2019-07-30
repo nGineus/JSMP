@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {getGroupById, updateDevice} from '../api';
+import {getGroupById, updateGroup} from '../api';
 import GroupForm from "../components/GroupForm";
 import GroupDevices from "./GroupDevices";
 
@@ -22,8 +22,8 @@ export default class GroupEdit extends PureComponent {
     });
   };
 
-  handleFormSubmit = async (device) => {
-    await updateDevice(this.state.id, device);
+  handleFormSubmit = async (group) => {
+    await updateGroup(this.state.id, group);
     window.history.back();
   };
 
@@ -45,9 +45,12 @@ export default class GroupEdit extends PureComponent {
             </ol>
           </nav>
         </div>
-
-        <GroupForm onSubmit={this.handleFormSubmit} group={group}/>
-        <GroupDevices onSubmit={this.handleFormSubmit} group={group}/>
+        <div className="container mb-5">
+          <GroupForm onSubmit={this.handleFormSubmit} group={group}/>
+        </div>
+        <div className="long-margin-top">
+          <GroupDevices onSubmit={this.handleFormSubmit} group={group}/>
+        </div>
       </div>
     );
   }

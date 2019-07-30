@@ -54,8 +54,10 @@ export default class DeviceItem extends PureComponent {
           </div>
 
           <div className="btn-group" role="group">
-            <a href={`#/groups/log/${group.id}`} className="btn btn-outline-secondary">Log</a>
-            <a href={`#/groups/edit/${group.id}`} className="btn btn-outline-secondary">Edit</a>
+            <a href={`#/groups/log/${group.id}`}
+               className="btn btn-outline-secondary">Log</a>
+            <a href={`#/groups/edit/${group.id}`}
+               className="btn btn-outline-secondary">Edit</a>
             <button type="button" className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
           </div>
         </td>
