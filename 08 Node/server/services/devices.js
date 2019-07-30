@@ -1,11 +1,11 @@
 const Device = require('../models/devices');
-const DeviceLog = require('../models/device.log');
+const logService = require('../services/logService');
 const sendRequest = require('../utils/request');
 
 function deviceAdapter(device) {
-  const {_id, name, address, port, state} = device;
+  const {_id, name, address, port, state, groupId} = device;
   return {
-    id: _id, name, device, address, port, state
+    id: _id, name, groupId: groupId || null, address, port, state
   };
 }
 
@@ -21,13 +21,6 @@ async function getDeviceById(deviceId) {
   return deviceAdapter(device);
 }
 
-
-async function getDeviceLogById(deviceId) {
-  return await DeviceLog.find({
-    deviceId: deviceId
-  }).select('-_id -__v -deviceId').exec();
-}
-
 async function removeDevice(deviceId) {
   await Device.findByIdAndDelete(deviceId).exec();
 }
@@ -37,10 +30,11 @@ async function addDevice(device) {
     state: 'off',
     ...device
   });
-  newDevice.save();
+  return await newDevice.save();
 }
 
 async function updateDevice(deviceId, data) {
+  console.log('update device', deviceId, data);
   const device = await Device.findById(deviceId).exec();
 
   if (!device) {
@@ -53,7 +47,7 @@ async function updateDevice(deviceId, data) {
       data.state
     );
 
-    await logDeviceState(deviceId, data.state);
+    await logService.logState(deviceId, data.state);
   }
   await Device.findByIdAndUpdate(deviceId, data).exec();
 }
@@ -64,20 +58,10 @@ async function updateDeviceState(address, port, state) {
   await sendRequest(url);
 }
 
-async function logDeviceState(deviceId, state) {
-  const newDeviceLog = new DeviceLog({
-    date: new Date().toLocaleString(),
-    action: state === 'off' ? 'Off' : 'On',
-    deviceId: deviceId
-  });
-  newDeviceLog.save();
-}
-
 module.exports = {
   getDevices,
   getDeviceById,
   addDevice,
   removeDevice,
   updateDevice,
-  getDeviceLogById
 };

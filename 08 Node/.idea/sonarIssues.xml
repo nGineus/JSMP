@@ -8,12 +8,92 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/frontend/public/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/App.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/frontend/src/api.js">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/components/DeviceItem.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/components/GroupForm.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/components/GroupItem.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/constants.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/index.css">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/frontend/src/models/devices.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/DeviceAdd.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/DeviceEdit.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/DeviceLog.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/Devices.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/GroupAdd.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/GroupDevices.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/GroupEdit.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/GroupLog.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/scenes/Groups.jsx">
           <value>
             <set />
           </value>
@@ -48,12 +128,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/server/models/group.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/server/models/log.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/server/package.json">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/server/routes/devices.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/server/routes/groups.js">
           <value>
             <set />
           </value>
@@ -68,12 +163,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/server/services/groups.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/server/services/logService.js">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/server/services/rooms.js">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/server/utils/request.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../09_React_Native/package.json">
           <value>
             <set />
           </value>

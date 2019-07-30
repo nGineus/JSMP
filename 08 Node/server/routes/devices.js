@@ -1,5 +1,6 @@
 const express = require('express');
 const deviceService = require('../services/devices');
+const logService = require('../services/logService');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -42,7 +43,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/log/:id', async (req, res) => {
   const {id} = req.params;
-  const log = await deviceService.getDeviceLogById(id);
+  const log = await logService.getLogById(id);
 
   if (log) {
     res.json(log);

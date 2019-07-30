@@ -4,10 +4,11 @@ import { removeDevice, switchOn, switchOff } from '../api';
 import { devicePropType } from '../constants';
 
 export default class DeviceItem extends PureComponent {
-    handleDelete = async () => {
-        const {device, onUpdate} = this.props;
 
-        await removeDevice(device.id);
+    handleDelete = async () => {
+        const {device, groupId, onUpdate} = this.props;
+
+        await removeDevice(device.id, groupId);
         onUpdate();
     };
 

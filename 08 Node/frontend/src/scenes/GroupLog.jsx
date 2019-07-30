@@ -1,25 +1,26 @@
 import React, { PureComponent } from 'react';
-import { getDeviceById, getDeviceLog } from '../api';
+import { getGroupById, getGroupLog } from '../api';
 
-export default class DeviceLog extends PureComponent {
+export default class GroupLog extends PureComponent {
     state = {
-        device: null,
+        group: null,
         log: []
     };
 
     componentDidMount = async () => {
+        debugger;
         const { id } = this.props.match.params;
 
         this.setState({
-            device: await getDeviceById(id),
-            log: await getDeviceLog(id)
+            group: await getGroupById(id),
+            log: await getGroupLog(id)
         });
     };
 
     render() {
-        const { device, log } = this.state;
+        const { group, log } = this.state;
 
-        if (!device) {
+        if (!group) {
             return null;
         }
 
@@ -30,8 +31,9 @@ export default class DeviceLog extends PureComponent {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="#/">Home</a></li>
+                                <li className="breadcrumb-item"><a href="#/groups">Groups</a></li>
                                 <li className="breadcrumb-item"><a href="#/devices">Devices</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">{device.name} Log</li>
+                                <li className="breadcrumb-item active" aria-current="page">{group.name} Log</li>
                             </ol>
                         </nav>
                     </div>
