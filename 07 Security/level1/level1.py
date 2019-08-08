@@ -14,6 +14,14 @@ page_header = """
  
 page_footer = """
     </div>
+    <script>
+    function cleanInput(str) {
+      str = str.replace(/</g, '_')
+      str = str.replace(/>/g, '_');
+      console.log('OUT ', str);
+      return str;
+    }
+    </script>
   </body>
 </html>
 """
@@ -21,7 +29,8 @@ page_footer = """
 main_page_markup = """
 <form action="" method="GET">
   <input id="query" name="query" value="Enter query here..."
-    onfocus="this.value=''">
+    onfocus="this.value = ''"
+    oninput="this.value = cleanInput(this.value)"">
   <input id="button" type="submit" value="Search">
 </form>
 """
